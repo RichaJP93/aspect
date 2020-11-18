@@ -1,9 +1,14 @@
+import React from 'react'
+import GenericButton from '../components/GenericButton.js';
+
 function Home () {
   return (
     <>
       <h1>Welcome to ASPECT!</h1> 
-      <h3>Create a new room</h3>
-      <h3>Have a room code already? Join here!</h3>
+      <GenericButton label='Create a new room'/>
+      <p>
+        Have a room code already? <GenericButton label='Join Here!'/>
+      </p>   
     </>
   )
 }
