@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from '@material-ui/core/Button';
-
+// import './RoomCodeForm.css';
 
 class RoomCodeForm extends React.Component {
   constructor(props){
@@ -16,11 +16,10 @@ class RoomCodeForm extends React.Component {
   }
   render() {
     return (
-      <form onSubmit={(e) => { e.preventDefault();}}>
+      <form className="roomCodeForm" onSubmit={(e) => { e.preventDefault();}}>
         <p>Have a code already?</p>
         <p>Enter room code here!</p>
         <input type="text" onChange={this.codeChange}/>
-        <p>{this.state.roomCode}</p>
         <Button type="submit" variant="contained" color="primary" onClick={this.codeSubmit}>Join Here!</Button>
       </form>      
     )
