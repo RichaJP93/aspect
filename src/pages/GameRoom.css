@@ -1,8 +1,33 @@
+.GameRoom {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	/* justify-content: center; */
+}
+
 .GameRoomDisplayContainer {
 	display: flex;
 	flex-flow: row;
-	align-items: center;
 	max-width: 1120px;
+	justify-content: center;
 	width: 90%;
 	margin: 0 auto;
+}
+
+.UserList {
+	position: absolute;
+	left:0px;
+	margin-left: 10px;
+}
+
+.SelectedCardList {
+	justify-content: top;
+	margin-bottom: 80px;
+}
+
+.StoryList {
+	position: absolute;
+	right: 0px;
+	margin-right: 20px;
 }

@@ -13,9 +13,15 @@ export default function GameRoom() {
       <h1>Game Room</h1>
       <StoryBox />
       <div className="GameRoomDisplayContainer">
-        <UserList />
-        <SelectedCardList />
-        <StoryList />
+        <div className="UserList" >
+          <UserList />
+        </div>
+        <div className="SelectedCardList">
+          <SelectedCardList />
+        </div>  
+        <div className="StoryList">
+          <StoryList />
+        </div>     
       </div>
       <CardList />
     </div>
