@@ -2,7 +2,5 @@
 	display: flex;
 	flex-flow: row;
 	align-items: center;
-	/* max-width: 1120px;
-	width: 90%;
-	margin: 50 auto;*/
+	padding-top: 5px;
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Card from './Card.js';
+import GameCard from './GameCard.js';
 import './CardList.css'
 
 export default class CardList extends Component {
@@ -13,7 +13,7 @@ export default class CardList extends Component {
     return (
       <div>
         <ul className='SelectedCards'>
-          {this.state.cardSequence.map(cardValue => (<Card key={cardValue} value={cardValue}/>))}                
+          {this.state.cardSequence.map(cardValue => (<GameCard key={cardValue} value={cardValue}/>))}                
         </ul>   
       </div>
     )
