@@ -1,11 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class Card extends Component {
-  render() {
-    return (
-      <div>
-        <p>Card</p>
-      </div>
-    )
-  }
+export default function Card(props) {
+  return (
+    <div>
+      {props.value}
+    </div>
+  )
 }
