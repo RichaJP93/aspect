@@ -22,6 +22,7 @@ function Home () {
       >
         Create a new room
       </Button>
+      <Link to="/setup">Setup</Link>  
       <RoomCodeForm />  
       <Link to="/lobby">Lobby</Link>        
     </div>
