@@ -20,7 +20,7 @@ class RoomCodeForm extends React.Component {
         <p>Have a code already?</p>
         <p>Enter room code here!</p>
         <input type="text" onChange={this.codeChange}/>
-        <Button type="submit" variant="contained" color="primary" onClick={this.codeSubmit}>Join Here!</Button>
+        <Button type="submit" variant="contained" color="primary" onClick={this.codeSubmit}>Join</Button>
       </form>      
     )
   }
