@@ -1,7 +1,6 @@
 import React from 'react'
 import Button from '@material-ui/core/Button';
 import { Link } from "react-router-dom";
-
 import { nanoid } from 'nanoid';
 
 
@@ -67,12 +66,17 @@ class SetupPage extends React.Component {
             </li>            
           ))}     
         </ul>
-        <Link to={`/lobby/${this.state.roomCode}`}>
+        <Link 
+          to={{
+            pathname: `/lobby/${this.state.roomCode}`,
+            state: {
+              roomcode: this.state.roomCode,  
+              storylist:this.state.storyList}  
+          }}
+           >
           <Button type="button"
             variant="contained" 
-            color="primary" 
-            roomcode={this.state.roomCode} 
-            storylist={this.state.storyList} 
+            color="primary"         
           >Submit</Button>
         </Link>
       </div>

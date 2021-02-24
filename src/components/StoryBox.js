@@ -4,7 +4,7 @@ export default class StoryBox extends Component {
   render() {
     return (
       <div>
-        <p>Story description/ticket number</p>
+        <p>{this.props.currentStory}</p>
       </div>
     )
   }
