@@ -13,7 +13,14 @@ export default class CardList extends Component {
     return (
       <div>
         <ul className='SelectedCards'>
-          {this.state.cardSequence.map(cardValue => (<GameCard key={cardValue} value={cardValue}/>))}                
+          {this.state.cardSequence.map(
+            cardValue => (
+              <GameCard 
+                key={cardValue} 
+                value={cardValue}
+              />
+            )
+          )}                
         </ul>   
       </div>
     )

@@ -34,7 +34,10 @@ class GameRoom extends React.Component {
     return (
       <div className="GameRoom">        
         <h1>Game Room</h1>
-        <StoryBox currentStory={this.state.currentStory}/>
+        <div className="CurrentStoryContainer">
+          <h3>Current Story: </h3>
+          <StoryBox currentStory={this.state.currentStory}/>
+        </div>        
         <div className="GameRoomDisplayContainer">
           <div className="UserList" >
             <UserList />
@@ -43,7 +46,7 @@ class GameRoom extends React.Component {
             <SelectedCardList />
           </div>  
           <div className="StoryList">
-            <StoryList storylist={data.storylist}/>
+            <StoryList storylist={data.storylist} setCurrentStory={this.setCurrentStory}/>
           </div>     
         </div>
         <CardList />

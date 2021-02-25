@@ -7,8 +7,8 @@ export default class StoryList extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(item){
-    console.log(item)
+  handleClick(item){    
+    this.props.setCurrentStory(item)
   }
 
   render() {

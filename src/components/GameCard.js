@@ -5,13 +5,17 @@ import Typography from '@material-ui/core/Typography';
 import './GameCard.css'
 
 export default function GameCard(props) {
-  const cardSubmit = (event) => {
-    event.preventDefault();
-    console.log(props.value);
+
+  const handleClick = ()=> {
+    cardSubmit(props.value)
+  }
+  
+  const cardSubmit = (value) => {
+    console.log(value)   
   }
 
   return (
-    <Card className="gameCard" variant="outlined" onClick={cardSubmit}>
+    <Card className="gameCard" variant="outlined" onClick={handleClick}>
       <CardContent className="content">
         <Typography>
           {props.value}
