@@ -1,0 +1,8 @@
+/* 
+STORY
+Id 
+description
+points
+roomID
+
+*/

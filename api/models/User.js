@@ -1,0 +1,8 @@
+/* 
+User
+Id 
+roomCode
+isAdmin
+
+
+*/

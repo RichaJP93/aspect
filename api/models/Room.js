@@ -1,0 +1,8 @@
+/* 
+ROOM
+Id 
+isActive (?)
+adminID
+
+
+*/
