@@ -45,10 +45,7 @@ exports.getRoom = async (req, res, next) => {
 // @route POST /api/v1/rooms/
 // @access Public
 exports.addRoom = async (req, res, next) => {
-  console.log(req.body)
   try {
-      const {roomCode, isActive, adminID}  = req.body;
-
       const room = await Room.create(req.body);
 
       return res.status(201).json({
@@ -72,4 +69,64 @@ exports.addRoom = async (req, res, next) => {
           });
       }
   }    
+}
+
+// @desc Delete a room
+// @route DELETE /api/v1/rooms/:id
+// @access Public
+exports.deleteRoom = async (req, res, next) => {
+    try {
+        const room = await Room.findById(req.params.id);
+
+        if(!room){
+            return res.status(404).json({
+                success: false,
+                error: 'Room ID not found'
+            });
+        }
+
+        await room.remove();
+
+        return res.status(200).json({
+            success: true,
+            data: {}
+        });
+
+    } catch (err) {
+        return res.status(500).json({
+            success:false,
+            error: 'Server Error'
+        });
+    } 
+}
+
+// @desc Update a room
+// @route PUT /api/v1/rooms/:id
+// @access Public
+exports.updateRoom = async (req, res, next) => {
+    try {
+        const room = await Room.findById(req.params.id);
+
+        if(!room){
+            return res.status(404).json({
+                success: false,
+                error: 'Room ID not found'
+            });
+        }
+
+        await room.update({}, {
+            isActive: req.body.isActive,
+        });
+
+        return res.status(200).json({
+            success: true,
+            data: {}
+        });
+
+    } catch (err) {
+        return res.status(500).json({
+            success:false,
+            error: 'Server Error'
+        });
+    } 
 }
