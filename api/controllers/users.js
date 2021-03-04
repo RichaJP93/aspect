@@ -25,8 +25,7 @@ exports.getUsers = async (req, res, next) => {
 // @access Public
 exports.getUser = async (req, res, next) => {
     try {
-        const {id}  = req.body;
-        const story = await User.find(id);
+        const user = await User.find({"_id": `${req.params.id}`});
   
         return res.status(200).json({
             success: true,
@@ -36,7 +35,7 @@ exports.getUser = async (req, res, next) => {
     } catch (err) {
         return res.status(500).json({
             success:false,
-            error:'Server error'
+            error: err.message
         });
     }
   }
@@ -66,7 +65,7 @@ exports.addUser = async (req, res, next) => {
             console.log(err)
             return res.status(500).json({
                 success:false,
-                error: 'Server Error'
+                error: err.message
             });
         }
     }    
@@ -96,7 +95,7 @@ exports.deleteUser = async (req, res, next) => {
     } catch (err) {
         return res.status(500).json({
             success:false,
-            error: 'Server Error'
+            error: err.message
         });
     } 
 }
@@ -127,7 +126,7 @@ exports.updateUser = async (req, res, next) => {
     } catch (err) {
         return res.status(500).json({
             success:false,
-            error: 'Server Error'
+            error: err.message
         });
     } 
 }

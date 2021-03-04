@@ -15,7 +15,7 @@ exports.getRooms = async (req, res, next) => {
     } catch (err) {
         return res.status(500).json({
             success:false,
-            error:'Server error'
+            error: err.message
         });
     }
 }
@@ -25,8 +25,7 @@ exports.getRooms = async (req, res, next) => {
 // @access Public
 exports.getRoom = async (req, res, next) => {
   try {
-      const {id}  = req.body;
-      const room = await Room.find(id);
+      const room = await Room.find({"_id": `${req.params.id}`});
 
       return res.status(200).json({
           success: true,
@@ -36,7 +35,7 @@ exports.getRoom = async (req, res, next) => {
   } catch (err) {
       return res.status(500).json({
           success:false,
-          error:'Server error'
+          error: err.message
       });
   }
 }
@@ -65,7 +64,7 @@ exports.addRoom = async (req, res, next) => {
         console.log(err)
           return res.status(500).json({
               success:false,
-              error: 'Server Error'
+              error: err.message
           });
       }
   }    
@@ -93,9 +92,10 @@ exports.deleteRoom = async (req, res, next) => {
         });
 
     } catch (err) {
+        console.log(err)
         return res.status(500).json({
             success:false,
-            error: 'Server Error'
+            error: err.message
         });
     } 
 }
@@ -103,30 +103,31 @@ exports.deleteRoom = async (req, res, next) => {
 // @desc Update a room
 // @route PUT /api/v1/rooms/:id
 // @access Public
-exports.updateRoom = async (req, res, next) => {
-    try {
-        const room = await Room.findById(req.params.id);
+// exports.updateRoom = async (req, res, next) => {
+//     try {
+//         const room = await Room.findById(req.params.id);
 
-        if(!room){
-            return res.status(404).json({
-                success: false,
-                error: 'Room ID not found'
-            });
-        }
+//         if(!room){
+//             return res.status(404).json({
+//                 success: false,
+//                 error: 'Room ID not found'
+//             });
+//         }
 
-        await room.update({}, {
-            isActive: req.body.isActive,
-        });
+//         await room.update({}, {
+//             isActive: req.body.isActive,
+//         });
 
-        return res.status(200).json({
-            success: true,
-            data: {}
-        });
+//         return res.status(200).json({
+//             success: true,
+//             data: {}
+//         });
 
-    } catch (err) {
-        return res.status(500).json({
-            success:false,
-            error: 'Server Error'
-        });
-    } 
-}
+//     } catch (err) {
+//         console.log(err)
+//         return res.status(500).json({
+//             success:false,
+//             error: err.message
+//         });
+//     } 
+// }

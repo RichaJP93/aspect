@@ -3,22 +3,22 @@ const Story = require('../models/Story');
 // @desc Get all stories
 // @route GET /api/v1/stories
 // @access Public
-exports.getStories = async (req, res, next) => {
-    try {
-        const stories = await Story.find();
+// exports.getStories = async (req, res, next) => {
+//     try {
+//         const stories = await Story.find();
 
-        return res.status(200).json({
-            success: true,
-            count: stories.length,
-            data: stories
-        });
-    } catch (err) {
-        return res.status(500).json({
-            success:false,
-            error:'Server error'
-        });
-    }
-}
+//         return res.status(200).json({
+//             success: true,
+//             count: stories.length,
+//             data: stories
+//         });
+//     } catch (err) {
+//         return res.status(500).json({
+//             success:false,
+//             error: err.message
+//         });
+//     }
+// }
 
 
 // @desc Get one story
@@ -26,9 +26,7 @@ exports.getStories = async (req, res, next) => {
 // @access Public
 exports.getStory = async (req, res, next) => {
   try {
-      const {id}  = req.body;
-      const story = await Story.find(id);
-
+      const story = await Story.find({"_id": `${req.params.id}`});
       return res.status(200).json({
           success: true,
           count: story.length,
@@ -37,7 +35,7 @@ exports.getStory = async (req, res, next) => {
   } catch (err) {
       return res.status(500).json({
           success:false,
-          error:'Server error'
+          error: err.message
       });
   }
 }
@@ -68,7 +66,7 @@ exports.addStory = async (req, res, next) => {
           console.log(err)
             return res.status(500).json({
                 success:false,
-                error: 'Server Error'
+                error: err.message
             });
         }
     }    
@@ -85,7 +83,7 @@ exports.deleteStory = async (req, res, next) => {
         if(!story){
             return res.status(404).json({
                 success: false,
-                error: 'Stpry ID not found'
+                error: 'Story ID not found'
             });
         }
 
@@ -99,7 +97,7 @@ exports.deleteStory = async (req, res, next) => {
     } catch (err) {
         return res.status(500).json({
             success:false,
-            error: 'Server Error'
+            error: err.message
         });
     } 
 }
@@ -107,31 +105,31 @@ exports.deleteStory = async (req, res, next) => {
 // @desc Update a story
 // @route PUT /api/v1/stories/:id
 // @access Public
-exports.updateStory = async (req, res, next) => {
-    try {
-        const story = await Story.findById(req.params.id);
+// exports.updateStory = async (req, res, next) => {
+//     try {
+//         const story = await Story.findById(req.params.id);
 
-        if(!story){
-            return res.status(404).json({
-                success: false,
-                error: 'Story ID not found'
-            });
-        }
+//         if(!story){
+//             return res.status(404).json({
+//                 success: false,
+//                 error: 'Story ID not found'
+//             });
+//         }
 
-        await story.update({}, {
-            description: req.body.description,
-            points: req.body.points
-        });
+//         await story.update({}, {
+//             description: req.body.description,
+//             points: req.body.points
+//         });
 
-        return res.status(200).json({
-            success: true,
-            data: {}
-        });
+//         return res.status(200).json({
+//             success: true,
+//             data: {}
+//         });
 
-    } catch (err) {
-        return res.status(500).json({
-            success:false,
-            error: 'Server Error'
-        });
-    } 
-}
+//     } catch (err) {
+//         return res.status(500).json({
+//             success:false,
+//             error: err.message
+//         });
+//     } 
+// }
