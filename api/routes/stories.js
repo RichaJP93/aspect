@@ -9,7 +9,7 @@ router
 router
     .route('/:id')    
     .get(getStory)    
-    // .put(updateStory)
+    .put(updateStory)
     .delete(deleteStory);
 
 module.exports = router;

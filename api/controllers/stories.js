@@ -105,31 +105,20 @@ exports.deleteStory = async (req, res, next) => {
 // @desc Update a story
 // @route PUT /api/v1/stories/:id
 // @access Public
-// exports.updateStory = async (req, res, next) => {
-//     try {
-//         const story = await Story.findById(req.params.id);
-
-//         if(!story){
-//             return res.status(404).json({
-//                 success: false,
-//                 error: 'Story ID not found'
-//             });
-//         }
-
-//         await story.update({}, {
-//             description: req.body.description,
-//             points: req.body.points
-//         });
-
-//         return res.status(200).json({
-//             success: true,
-//             data: {}
-//         });
-
-//     } catch (err) {
-//         return res.status(500).json({
-//             success:false,
-//             error: err.message
-//         });
-//     } 
-// }
+exports.updateStory = async (req, res, next) => {
+    try {
+        await Story.findOneAndUpdate({_id: req.params.id}, {
+            description: req.body.description,
+            points: req.body.points
+        })
+        return res.status(200).json({
+            success: true,
+            data: {}
+        });
+    } catch (err) {
+        return res.status(500).json({
+            success:false,
+            error: err.message
+        });
+    } 
+}
