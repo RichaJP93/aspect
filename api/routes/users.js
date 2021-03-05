@@ -10,7 +10,7 @@ router
 router
     .route('/:id')    
     .get(getUser)
-    // .put(updateUser)
+    .put(updateUser)
     .delete(deleteUser);
 
 module.exports = router;

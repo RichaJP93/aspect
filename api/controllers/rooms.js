@@ -103,31 +103,20 @@ exports.deleteRoom = async (req, res, next) => {
 // @desc Update a room
 // @route PUT /api/v1/rooms/:id
 // @access Public
-// exports.updateRoom = async (req, res, next) => {
-//     try {
-//         const room = await Room.findById(req.params.id);
-
-//         if(!room){
-//             return res.status(404).json({
-//                 success: false,
-//                 error: 'Room ID not found'
-//             });
-//         }
-
-//         await room.update({}, {
-//             isActive: req.body.isActive,
-//         });
-
-//         return res.status(200).json({
-//             success: true,
-//             data: {}
-//         });
-
-//     } catch (err) {
-//         console.log(err)
-//         return res.status(500).json({
-//             success:false,
-//             error: err.message
-//         });
-//     } 
-// }
+exports.updateRoom = async (req, res, next) => {
+    try {
+        await Room.findOneAndUpdate({_id: req.params.id}, {
+            adminID: req.body.adminID,
+            isActive: req.body.isActive
+        })
+        return res.status(200).json({
+            success: true,
+            data: {}
+        });
+    } catch (err) {
+        return res.status(500).json({
+            success:false,
+            error: err.message
+        });
+    } 
+}

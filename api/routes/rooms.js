@@ -10,7 +10,7 @@ router
 router
     .route('/:id')    
     .get(getRoom)
-    // .put(updateRoom)
+    .put(updateRoom)
     .delete(deleteRoom);
 
 module.exports = router;

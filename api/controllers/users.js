@@ -105,24 +105,13 @@ exports.deleteUser = async (req, res, next) => {
 // @access Public
 exports.updateUser = async (req, res, next) => {
     try {
-        const user = await User.findById(req.params.id);
-
-        if(!user){
-            return res.status(404).json({
-                success: false,
-                error: 'User ID not found'
-            });
-        }
-
-        await user.update({}, {
-            isAdmin: req.body.isAdmin,
-        });
-
+        await User.findOneAndUpdate({_id: req.params.id}, {
+            isAdmin: req.body.isAdmin
+        })
         return res.status(200).json({
             success: true,
             data: {}
         });
-
     } catch (err) {
         return res.status(500).json({
             success:false,
