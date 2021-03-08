@@ -22,15 +22,15 @@ const Story = require('../models/Story');
 
 
 // @desc Get one story
-// @route GET /api/v1/stories/:id
+// @route GET /api/v1/stories/:roomCode
 // @access Public
 exports.getStory = async (req, res, next) => {
   try {
-      const story = await Story.find({"_id": `${req.params.id}`});
+      const storyArray = await Story.find({"roomCode": `${req.params.roomCode}`});
       return res.status(200).json({
           success: true,
-          count: story.length,
-          data: story
+          count: storyArray.length,
+          data: storyArray
       });
   } catch (err) {
       return res.status(500).json({
@@ -45,13 +45,18 @@ exports.getStory = async (req, res, next) => {
 // @route POST /api/v1/stories/
 // @access Public
 exports.addStory = async (req, res, next) => {
+    console.log(req.body)
     try {
-  
-        const story = await Story.create(req.body);
-  
+        req.body.storyList.forEach(story => {
+            Story.create({
+                "description": story,
+                "points": "0",
+                "roomCode": req.body.roomCode
+            });
+        });
+          
         return res.status(201).json({
-            success: true,
-            data: story
+            success: true           
         });
         
     } catch (err) {

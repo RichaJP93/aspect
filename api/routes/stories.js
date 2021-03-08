@@ -5,10 +5,11 @@ const {getStory, addStory, updateStory, deleteStory} = require('../controllers/s
 router
     .route('/')   
     .post(addStory);
-
+router
+    .route('/:roomCode')    
+    .get(getStory)  
 router
     .route('/:id')    
-    .get(getStory)    
     .put(updateStory)
     .delete(deleteStory);
 

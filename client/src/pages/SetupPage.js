@@ -1,7 +1,8 @@
-import React from 'react'
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import { Link } from "react-router-dom";
 import { nanoid } from 'nanoid';
+import axios from 'axios';
 
 
 class SetupPage extends React.Component {
@@ -16,6 +17,7 @@ class SetupPage extends React.Component {
     this.storyChange = this.storyChange.bind(this);
     this.storySubmit = this.storySubmit.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
+    this.sendStoryList = this.sendStoryList.bind(this);
   }
 
   componentDidMount(){
@@ -43,6 +45,21 @@ class SetupPage extends React.Component {
       storyList: newList
     })
   }
+
+  sendStoryList = async () => {    
+    try {
+      const res = await axios.post('/api/v1/stories', {
+        roomCode: this.state.roomCode,
+        storyList: this.state.storyList
+      }).then((res) => {
+        console.log(res);
+      })
+    } 
+    catch (err) {
+      console.log(err)
+    }
+  }  
+  
 
   render() {
     return (
@@ -76,7 +93,8 @@ class SetupPage extends React.Component {
            >
           <Button type="button"
             variant="contained" 
-            color="primary"         
+            color="primary" 
+            onClick={this.sendStoryList}       
           >Submit</Button>
         </Link>
       </div>
