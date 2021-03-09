@@ -8,16 +8,14 @@ export default class StoryList extends Component {
   }
 
   handleClick(item){    
-    this.props.setCurrentStory(item)
+    this.props.setCurrentStory(item.description)
   }
 
   render() {
     return (
       <div>
         <ul>
-          {this.props.storylist.map(item => (
-            <li key={item} onClick={() =>this.handleClick(item)}>{item}</li>            
-          ))}     
+          {this.props.storyList.map(story => <li key= {story._id} onClick={() =>this.handleClick(story)}>{story.description}</li>)}
         </ul>
       </div>
     )

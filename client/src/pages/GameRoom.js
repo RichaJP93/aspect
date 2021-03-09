@@ -5,6 +5,7 @@ import StoryList from '../components/StoryList.js'
 import CardList from '../components/CardList.js'
 import SelectedCardList from '../components/SelectedCardList.js'
 import './GameRoom.css'
+import axios from 'axios';
 
 
 class GameRoom extends React.Component {
@@ -12,13 +13,20 @@ class GameRoom extends React.Component {
     super(props);
 
     this.state= {
+      storyList: [],
       storyPoints: '',
       currentStory: ''
     };
   }  
   
   componentDidMount(){
-    this.setCurrentStory(this.props.location.state.storylist[0])
+    axios.get(`/api/v1/stories/${this.props.location.state.roomcode}`)
+      .then(response => {
+        const storyList = response.data.storyList;
+        this.setStoryList(storyList);
+        this.setCurrentStory(storyList[0].description);
+      })
+    
   }
 
   setCurrentStory = (story) => {
@@ -27,10 +35,13 @@ class GameRoom extends React.Component {
     })
   }
 
-  
+  setStoryList = (storyList) => {
+    this.setState({
+      storyList: storyList
+    })
+  } 
   
   render() {
-    const data = this.props.location.state
     return (
       <div className="GameRoom">        
         <h1>Game Room</h1>
@@ -46,7 +57,7 @@ class GameRoom extends React.Component {
             <SelectedCardList />
           </div>  
           <div className="StoryList">
-            <StoryList storylist={data.storylist} setCurrentStory={this.setCurrentStory}/>
+            <StoryList storyList={this.state.storyList} setCurrentStory={this.setCurrentStory}/>
           </div>     
         </div>
         <CardList />

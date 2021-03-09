@@ -24,13 +24,13 @@ const Story = require('../models/Story');
 // @desc Get one story
 // @route GET /api/v1/stories/:roomCode
 // @access Public
-exports.getStory = async (req, res, next) => {
+exports.getStoryList = async (req, res, next) => {
   try {
-      const storyArray = await Story.find({"roomCode": `${req.params.roomCode}`});
+      const storyList = await Story.find({"roomCode": `${req.params.roomCode}`});
       return res.status(200).json({
           success: true,
-          count: storyArray.length,
-          data: storyArray
+          count: storyList.length,
+          storyList: storyList
       });
   } catch (err) {
       return res.status(500).json({
