@@ -18,6 +18,7 @@ class SetupPage extends React.Component {
     this.storySubmit = this.storySubmit.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
     this.sendStoryList = this.sendStoryList.bind(this);
+    this.createRoom = this.createRoom.bind(this);
   }
 
   componentDidMount(){
@@ -58,7 +59,23 @@ class SetupPage extends React.Component {
     catch (err) {
       console.log(err)
     }
-  }  
+  } 
+
+  createRoom = async () => {
+    try {
+      this.sendStoryList()
+      const res = await axios.post('/api/v1/rooms', {
+        roomCode: this.state.roomCode,
+        isActive: true,
+        adminID: 'admin'
+      }).then((res) => {
+        console.log(res);
+      })
+    } 
+    catch (err) {
+      console.log(err)
+    }
+  }
   
 
   render() {
@@ -94,7 +111,7 @@ class SetupPage extends React.Component {
           <Button type="button"
             variant="contained" 
             color="primary" 
-            onClick={this.sendStoryList}       
+            onClick={this.createRoom}       
           >Submit</Button>
         </Link>
       </div>

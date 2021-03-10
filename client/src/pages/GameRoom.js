@@ -24,7 +24,7 @@ class GameRoom extends React.Component {
       .then(response => {
         const storyList = response.data.storyList;
         this.setStoryList(storyList);
-        this.setCurrentStory(storyList[0].description);
+        this.setCurrentStory(storyList[0]);
       })
     
   }
@@ -40,14 +40,38 @@ class GameRoom extends React.Component {
       storyList: storyList
     })
   } 
+
+  setStoryPoints = (points) => {
+    this.setState({
+      storyPoints: points
+    })
+  }
+
+  updateStory = async () => {
+    try {
+      const res = await axios.put(`/api/v1/stories/${this.state.currentStory._id}`, {
+        description: this.state.currentStory.description,
+        points: this.state.storyPoints
+      }).then((res) => {
+        console.log(res);
+      })
+    } 
+    catch (err) {
+      console.log(err)
+    }
+  }
   
   render() {
     return (
       <div className="GameRoom">        
         <h1>Game Room</h1>
-        <div className="CurrentStoryContainer">
-          <h3>Current Story: </h3>
-          <StoryBox currentStory={this.state.currentStory}/>
+        <div className="CurrentStoryContainer">          
+          <StoryBox 
+            currentStory={this.state.currentStory} 
+            storyPoints={this.state.storyPoints} 
+            setStoryPoints={this.setStoryPoints}
+            updateStory={this.updateStory}
+          />          
         </div>        
         <div className="GameRoomDisplayContainer">
           <div className="UserList" >
