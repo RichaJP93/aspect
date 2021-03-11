@@ -20,12 +20,23 @@ class GameRoom extends React.Component {
   }  
   
   componentDidMount(){
-    axios.get(`/api/v1/stories/${this.props.location.state.roomcode}`)
+    if(this.props.location.state){
+      axios.get(`/api/v1/stories/${this.props.location.state.roomcode}`)
       .then(response => {
         const storyList = response.data.storyList;
         this.setStoryList(storyList);
         this.setCurrentStory(storyList[0]);
       })
+    } 
+    else {
+      axios.get(`/api/v1/stories/${window.location.pathname.substring(7)}`)
+      .then(response => {
+        const storyList = response.data.storyList;
+        this.setStoryList(storyList);
+        this.setCurrentStory(storyList[0]);
+      })
+    }
+    
     
   }
 

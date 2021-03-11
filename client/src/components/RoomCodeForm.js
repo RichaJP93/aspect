@@ -1,29 +1,39 @@
 import React from 'react'
 import Button from '@material-ui/core/Button';
 // import './RoomCodeForm.css';
+import { withRouter } from "react-router-dom";
 
 class RoomCodeForm extends React.Component {
   constructor(props){
     super(props);
-    this.state= {roomCode: ''};
+    this.state= {
+      roomCode: ''
+    };
+    this.codeChange = this.codeChange.bind(this);
+    this.codeSubmit = this.codeSubmit.bind(this);
   }
+
   codeChange = (event) => {
     this.setState({roomCode: event.target.value})
   }
-  codeSubmit = (event) => {
-    event.preventDefault();
-    console.log(this.state.roomCode);
+  codeSubmit = () => {
+    this.props.history.push(`/lobby/${this.state.roomCode}`)
   }
+
   render() {
     return (
-      <form className="roomCodeForm" onSubmit={(e) => { e.preventDefault();}}>
+      <div>
         <p>Have a code already?</p>
-        <p>Enter room code here!</p>
+        <p>Enter the room code here!</p>
         <input type="text" onChange={this.codeChange}/>
-        <Button type="submit" variant="contained" color="primary" onClick={this.codeSubmit}>Join</Button>
-      </form>      
+        <Button 
+          variant="contained" 
+          color="primary"
+          onClick={this.codeSubmit}
+        >Join</Button>
+      </div>   
     )
   }
 }
 
-export default RoomCodeForm;
+export default withRouter(RoomCodeForm);
