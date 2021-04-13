@@ -1,22 +1,18 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class StoryList extends Component {
-  constructor(props){
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
+const StoryList = ({setCurrentStory, storyList}) => {
+  
+  const handleClick = (item) => {    
+    setCurrentStory(item)
   }
 
-  handleClick(item){    
-    this.props.setCurrentStory(item)
-  }
-
-  render() {
-    return (
-      <div>
-        <ul>
-          {this.props.storyList.map(story => <li key= {story._id} onClick={() =>this.handleClick(story)}>{story.description}</li>)}
-        </ul>
-      </div>
-    )
-  }
+  return (
+    <div>
+      <ul>
+        {storyList.map(story => <li key= {story._id} onClick={() => handleClick(story)}>{story.description}</li>)}
+      </ul>
+    </div>
+  )  
 }
+
+export default StoryList;

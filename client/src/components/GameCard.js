@@ -4,10 +4,10 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import './GameCard.css'
 
-export default function GameCard(props) {
+const GameCard = ({value}) => {
 
   const handleClick = ()=> {
-    cardSubmit(props.value)
+    cardSubmit(value)
   }
   
   const cardSubmit = (value) => {
@@ -18,9 +18,11 @@ export default function GameCard(props) {
     <Card className="gameCard" variant="outlined" onClick={handleClick}>
       <CardContent className="content">
         <Typography>
-          {props.value}
+          {value}
         </Typography>        
       </CardContent>   
     </Card>
   )
 }
+
+export default GameCard;

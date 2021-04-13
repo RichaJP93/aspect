@@ -1,40 +1,35 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 
 
-export default class StoryBox extends Component {
-  constructor(props){
-    super(props);
-    this.handleChange = this.handleChange.bind(this);
-    this.pointsSubmit = this.pointsSubmit.bind(this);
+const StoryBox = ({storyPoints, setStoryPoints, updateStory, currentStory}) => {
+  
+  const handleChange = (event) => {   
+    setStoryPoints(event.target.value)
   }
 
-  handleChange = (event) => {   
-    this.props.setStoryPoints(event.target.value)
-  }
-
-  pointsSubmit = () => {
-    this.props.updateStory();
+  const pointsSubmit = () => {
+    updateStory();
   }
   
-  render() {
-    return (
+  return (
+    <div>
       <div>
-        <div>
-          <h3>Current Story: </h3>
-          <p>{this.props.currentStory.description}</p>
-        </div>
-        <div>
-          <input type="text" onChange={this.handleChange} />
-          <Button 
-            type="submit" 
-            variant="contained" 
-            color="primary" 
-            onClick={this.pointsSubmit}
-          >Save
-          </Button>
-        </div>
-      </div>       
-    )
-  }
+        <h3>Current Story: </h3>
+        <p>{currentStory.description}</p>
+      </div>
+      <div>
+        <input type="text" onChange={handleChange} />
+        <Button 
+          type="submit" 
+          variant="contained" 
+          color="primary" 
+          onClick={pointsSubmit}
+        >Save
+        </Button>
+      </div>
+    </div>       
+  )
 }
+
+export default StoryBox;
